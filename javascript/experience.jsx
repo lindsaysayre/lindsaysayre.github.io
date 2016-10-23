@@ -89,7 +89,7 @@ module.exports = React.createClass({
           <i className="fa fa-times-circle fa-2x" aria-hidden="true"></i>
         </div>
         <div className="modal-content">
-          <img className="resume" src="assets/images/BrookeAngel.png"/>
+          <img className="resume" src="assets/images/resume.png"/>
         </div>
       </Modal>);
   },
