@@ -52,8 +52,8 @@
 	var MainNav = __webpack_require__(192);
 	var PointNav = __webpack_require__(193);
 	var Experience = __webpack_require__(194);
-	var Projects = __webpack_require__(196);
-	var Contact = __webpack_require__(197);
+	//const Projects = require('./projects');
+	var Contact = __webpack_require__(196);
 	
 	var App = React.createClass({
 	  displayName: 'App',
@@ -145,11 +145,6 @@
 	          'section',
 	          { id: 'experience' },
 	          React.createElement(Experience, null)
-	        ),
-	        React.createElement(
-	          'section',
-	          { id: 'projects' },
-	          React.createElement(Projects, null)
 	        ),
 	        React.createElement(
 	          'section',
@@ -23304,17 +23299,6 @@
 	        React.createElement(
 	          "a",
 	          { onClick: this.props.setScrollState,
-	            className: this.props.scrollState == 2 ? 'active' : '' },
-	          React.createElement("i", { className: "fa fa-code fa-2x" }),
-	          React.createElement(
-	            "p",
-	            null,
-	            "Projects"
-	          )
-	        ),
-	        React.createElement(
-	          "a",
-	          { onClick: this.props.setScrollState,
 	            className: this.props.scrollState == 3 ? 'active' : '' },
 	          React.createElement("i", { className: "fa fa-info fa-2x" }),
 	          React.createElement(
@@ -23359,60 +23343,43 @@
 	        React.createElement(
 	          'center',
 	          { className: 'icons' },
-	          React.createElement('img', { src: 'assets/icons/git.png' }),
-	          React.createElement('img', { src: 'assets/icons/github.png' }),
-	          React.createElement('img', { src: 'assets/icons/rails.png' }),
-	          React.createElement('img', { src: 'assets/icons/javascript.png' }),
+	          React.createElement('img', { src: 'assets/icons/excel.png' }),
+	          React.createElement('img', { src: 'assets/icons/access.png' }),
+	          React.createElement('img', { src: 'assets/icons/spss.png' }),
+	          React.createElement('img', { src: 'assets/icons/powerpoint.png' }),
 	          React.createElement('img', { src: 'assets/icons/html5.png' }),
 	          React.createElement('img', { src: 'assets/icons/css3.png' }),
-	          React.createElement('img', { src: 'assets/icons/react.png' }),
 	          React.createElement('br', null),
 	          React.createElement(
 	            'strong',
 	            null,
-	            'Version Control Systems | '
+	            ' Data Analysis | '
 	          ),
-	          ' Git / Github',
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement(
-	            'strong',
-	            null,
-	            'JavaScript | '
-	          ),
-	          ' JavaScript, React.js, Flux, Redux, Node.js',
+	          'Microsoft Excel, Microsoft Access, SPSS',
 	          React.createElement('br', null),
 	          React.createElement('br', null),
 	          React.createElement(
 	            'strong',
 	            null,
-	            'Ruby | '
+	            'Content Creation | '
 	          ),
-	          ' Ruby, Rails ',
+	          'Adobe Creative Suite, SEO, Blog Writing, WordPress, Press Releases',
 	          React.createElement('br', null),
 	          React.createElement('br', null),
 	          React.createElement(
 	            'strong',
 	            null,
-	            'Testing Frameworks |'
+	            'Research | '
 	          ),
-	          ' RSpec, Capybara, Jest, Jasmine, Mocha',
+	          'Survey Building and Analysis, Writing Reports',
 	          React.createElement('br', null),
 	          React.createElement('br', null),
 	          React.createElement(
 	            'strong',
 	            null,
-	            'Web Design |'
+	            'Social Media | '
 	          ),
-	          ' CSS3, HTML5',
-	          React.createElement('br', null),
-	          React.createElement('br', null),
-	          React.createElement(
-	            'strong',
-	            null,
-	            'Misc |'
-	          ),
-	          ' Java, Matlab, Scheme',
+	          'Strategy, Channel Management, Direct Customer Communication',
 	          React.createElement('br', null),
 	          React.createElement('br', null)
 	        )
@@ -23478,7 +23445,7 @@
 	      React.createElement(
 	        'div',
 	        { className: 'modal-content' },
-	        React.createElement('img', { className: 'resume', src: 'assets/images/BrookeAngel.png' })
+	        React.createElement('img', { className: 'resume', src: 'assets/images/resume.png' })
 	      )
 	    );
 	  },
@@ -23517,18 +23484,6 @@
 	        ),
 	        React.createElement(
 	          'div',
-	          { className: "circle " + this.isActive('teaching'),
-	            onClick: function onClick() {
-	              return _this2.setActive('teaching');
-	            } },
-	          React.createElement(
-	            'div',
-	            null,
-	            'TEACHING'
-	          )
-	        ),
-	        React.createElement(
-	          'div',
 	          { className: "circle " + this.isActive('technologies'),
 	            onClick: function onClick() {
 	              return _this2.setActive('technologies');
@@ -23552,8 +23507,7 @@
 	'use strict';
 	
 	module.exports = {
-	  summary: 'I am a web developer and coding instructor currently living in San Francisco.\n\nAfter graduating from UC Berkeley in 2014 and spending a year working on community health projects in Mendocino County, I attended App Academy\'s competitive 12-week programming bootcamp for training in web development. App Academy hired me as a full-time teaching assistant directly out of the program and I have been mentoring students, delivering lectures, developing internal tools, and creating curriculum since.\n\nMy skillset includes Ruby, Rails, Javascript, React, Flux, Redux, RSPec, Capybara, Jasmine, and Jest. I\'ve been trained in object-oriented design patterns, Test Driven Development, and responsive design. I am well-practiced in working with new code bases and enjoy writing tests for React and Rails applications.\n\nI would love to work with your community organization or local business to create a beautiful web application. See below for samples of my work.',
-	  teaching: 'I am currently a Teaching Assistant at App Academy\'s programming bootcamp. I\'ve lectured to groups of students on topics including Object Oriented Design, Ruby on Rails, React/Flux, CSS, and RSpec/Capybara. I\'ve mentored hundreds of students through App Academy\'s intensive course and helped them understand new concepts and debug their code along the way.\n\nI have also volunteered at RailsBridge Workshops and spoken at Women Who Code events in San Francisco. I am passionate about making coding accessible to new students, and especially enjoy working in environments whose aim is to increase diversity in tech.\n\nIf you are looking for a speaker for your event, please do not hesitate to reach out. I love giving presentations to beginners and am happy to teach about Ruby, Rails, TDD, React/Flux, and more.\n  ',
+	  summary: 'Hi I’m Lindsay, an Ohio State University student with a passion for marketing and entrepreneurship. I have worked at a startup, a multi-billion dollar corporation, and studied everything in between. My experience spans across a wide range of products and services, so I specialize in jumping in with both feet and getting up to speed quickly. I love a challenge and thrive in a dynamic work environment where I get to wear many hats.',
 	  project1: 'A handspun framework in the style of Rails.',
 	  project2: 'A fruit foraging app built on Rails with a React/Redux frontend.',
 	  project3: 'A simple live chat app written in Node using socket.io.',
@@ -23562,229 +23516,6 @@
 
 /***/ },
 /* 196 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var React = __webpack_require__(166);
-	var sampleText = __webpack_require__(195);
-	
-	module.exports = React.createClass({
-	  displayName: 'exports',
-	  getInitialState: function getInitialState() {
-	    return { focused: 0 };
-	  },
-	  componentDidMount: function componentDidMount() {
-	    var _this = this;
-	
-	    this.resumeInterval();
-	    addEventListener('resize', function () {
-	      if (window.innerWidth > 800) {
-	        _this.resumeInterval();
-	      } else {
-	        _this.arrestInterval();
-	        _this.setState({ focused: 0 });
-	      }
-	    });
-	  },
-	  arrestInterval: function arrestInterval() {
-	    clearInterval(this.interval);
-	    this.interval = undefined;
-	  },
-	  resumeInterval: function resumeInterval() {
-	    var _this2 = this;
-	
-	    if (!this.interval && window.innerWidth > 800) {
-	      this.interval = setInterval(function () {
-	        return _this2.onRightArrow();
-	      }, 3000);
-	    }
-	  },
-	  componentWillUnmount: function componentWillUnmount() {
-	    this.arrestInterval();
-	  },
-	  onRightArrow: function onRightArrow() {
-	    this.setState({ focused: (this.state.focused + 1) % 4 });
-	  },
-	  onLeftArrow: function onLeftArrow() {
-	    this.setState({ focused: (this.state.focused - 1 + 4) % 4 });
-	  },
-	  getSliderStyle: function getSliderStyle() {
-	    return { marginLeft: -(this.state.focused * window.innerWidth * 0.62) };
-	  },
-	  render: function render() {
-	    var _this3 = this;
-	
-	    return React.createElement(
-	      'div',
-	      null,
-	      React.createElement(
-	        'div',
-	        { className: 'project-container-container' },
-	        React.createElement('i', { className: 'fa fa-chevron-left fa-4x mobile-disappear', onClick: this.onLeftArrow }),
-	        React.createElement(
-	          'div',
-	          { className: 'project-container' },
-	          React.createElement(
-	            'div',
-	            { className: 'project-slider',
-	              onMouseEnter: this.arrestInterval,
-	              onMouseLeave: this.resumeInterval,
-	              style: this.getSliderStyle() },
-	            React.createElement(
-	              'div',
-	              { className: 'project project-1' },
-	              React.createElement(
-	                'div',
-	                { className: 'project-overlay' },
-	                React.createElement(
-	                  'h1',
-	                  null,
-	                  'Miniframe'
-	                ),
-	                React.createElement(
-	                  'p',
-	                  null,
-	                  sampleText.project1
-	                ),
-	                React.createElement(
-	                  'div',
-	                  null,
-	                  React.createElement(
-	                    'a',
-	                    { href: 'https://github.com/brookeangel/railslite', alt: 'Github', target: '_blank' },
-	                    React.createElement('i', { className: 'fa fa-github fa-4x', 'aria-hidden': 'true' })
-	                  ),
-	                  React.createElement(
-	                    'a',
-	                    { href: 'https://miniframe.herokuapp.com/', alt: 'See it live!', target: '_blank' },
-	                    React.createElement('i', { className: 'fa fa-external-link fa-4x', 'aria-hidden': 'true' })
-	                  )
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              'div',
-	              { className: 'project project-2' },
-	              React.createElement(
-	                'div',
-	                { className: 'project-overlay' },
-	                React.createElement(
-	                  'h1',
-	                  null,
-	                  'Harvst'
-	                ),
-	                React.createElement(
-	                  'p',
-	                  null,
-	                  sampleText.project2
-	                ),
-	                React.createElement(
-	                  'div',
-	                  null,
-	                  React.createElement(
-	                    'a',
-	                    { href: 'https://github.com/brookeangel/Harvest', alt: 'Github', target: '_blank' },
-	                    React.createElement('i', { className: 'fa fa-github fa-4x', 'aria-hidden': 'true' })
-	                  ),
-	                  React.createElement(
-	                    'a',
-	                    { href: 'http://www.harvst.xyz/', alt: 'See it live!', target: '_blank' },
-	                    React.createElement('i', { className: 'fa fa-external-link fa-4x', 'aria-hidden': 'true' })
-	                  )
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              'div',
-	              { className: 'project project-3' },
-	              React.createElement(
-	                'div',
-	                { className: 'project-overlay' },
-	                React.createElement(
-	                  'h1',
-	                  null,
-	                  'Chitty Chat'
-	                ),
-	                React.createElement(
-	                  'p',
-	                  null,
-	                  sampleText.project3
-	                ),
-	                React.createElement(
-	                  'div',
-	                  null,
-	                  React.createElement(
-	                    'a',
-	                    { href: 'https://github.com/brookeangel/chitty_chat', alt: 'Github', target: '_blank' },
-	                    React.createElement('i', { className: 'fa fa-github fa-4x', 'aria-hidden': 'true' })
-	                  )
-	                )
-	              )
-	            ),
-	            React.createElement(
-	              'div',
-	              { className: 'project project-4' },
-	              React.createElement(
-	                'div',
-	                { className: 'project-overlay' },
-	                React.createElement(
-	                  'h1',
-	                  null,
-	                  'Jquery Snake'
-	                ),
-	                React.createElement(
-	                  'p',
-	                  null,
-	                  sampleText.project4
-	                ),
-	                React.createElement(
-	                  'div',
-	                  null,
-	                  React.createElement(
-	                    'a',
-	                    { href: 'https://github.com/brookeangel/jquery_snake', alt: 'Github', target: '_blank' },
-	                    React.createElement('i', { className: 'fa fa-github fa-4x', 'aria-hidden': 'true' })
-	                  ),
-	                  React.createElement(
-	                    'a',
-	                    { href: 'http://brookeangel.github.io/jquery_snake/', alt: 'See it live!', target: '_blank' },
-	                    React.createElement('i', { className: 'fa fa-external-link fa-4x', 'aria-hidden': 'true' })
-	                  )
-	                )
-	              )
-	            )
-	          )
-	        ),
-	        React.createElement('i', { className: 'fa fa-chevron-right fa-4x mobile-disappear',
-	          onClick: this.onRightArrow })
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'project-nav mobile-disappear' },
-	        React.createElement('div', { className: this.state.focused === 0 ? 'project-nav-button active' : 'project-nav-button',
-	          onClick: function onClick() {
-	            return _this3.setState({ focused: 0 });
-	          } }),
-	        React.createElement('div', { className: this.state.focused === 1 ? 'project-nav-button active' : 'project-nav-button',
-	          onClick: function onClick() {
-	            return _this3.setState({ focused: 1 });
-	          } }),
-	        React.createElement('div', { className: this.state.focused === 2 ? 'project-nav-button active' : 'project-nav-button',
-	          onClick: function onClick() {
-	            return _this3.setState({ focused: 2 });
-	          } }),
-	        React.createElement('div', { className: this.state.focused === 3 ? 'project-nav-button active' : 'project-nav-button',
-	          onClick: function onClick() {
-	            return _this3.setState({ focused: 3 });
-	          } })
-	      )
-	    );
-	  }
-	});
-
-/***/ },
-/* 197 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
