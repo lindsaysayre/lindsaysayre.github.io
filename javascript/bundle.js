@@ -23549,21 +23549,13 @@
 	          React.createElement(
 	            'p',
 	            null,
-	            'I\'d love to write code for your community project or organization.',
+	            'Want to discuss a marketing gig for your organization or community project?',
+	            React.createElement('br', null),
 	            React.createElement('br', null),
 	            'Don\'t hesitate to reach out.',
 	            React.createElement('br', null),
 	            React.createElement('br', null),
-	            'Photographs by ',
-	            React.createElement(
-	              'strong',
-	              null,
-	              'NickelHoops'
-	            ),
-	            '.',
-	            React.createElement('br', null),
-	            React.createElement('br', null),
-	            'Site written by ',
+	            'Photographs & Website by ',
 	            React.createElement(
 	              'strong',
 	              null,
