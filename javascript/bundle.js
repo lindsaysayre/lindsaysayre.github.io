@@ -23347,6 +23347,7 @@
 	          React.createElement('img', { src: 'assets/icons/access.png' }),
 	          React.createElement('img', { src: 'assets/icons/spss.png' }),
 	          React.createElement('img', { src: 'assets/icons/powerpoint.png' }),
+	          React.createElement('img', { src: 'assets/icons/wordpress.png' }),
 	          React.createElement('img', { src: 'assets/icons/html5.png' }),
 	          React.createElement('img', { src: 'assets/icons/css3.png' }),
 	          React.createElement('br', null),
@@ -23381,6 +23382,16 @@
 	          ),
 	          'Strategy, Channel Management, Direct Customer Communication',
 	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement(
+	            'strong',
+	            null,
+	            'Learning | '
+	          ),
+	          'SQL, HTML5, CSS3, Javascript, Git, GitHub',
+	          React.createElement('br', null),
+	          React.createElement('br', null),
+	          React.createElement('br', null),
 	          React.createElement('br', null)
 	        )
 	      );
@@ -23388,7 +23399,13 @@
 	      return React.createElement(
 	        'pre',
 	        { className: 'experience-content' },
-	        sampleText[this.state.active]
+	        sampleText.summary,
+	        React.createElement('br', null),
+	        React.createElement('br', null),
+	        sampleText.summary_1,
+	        React.createElement('br', null),
+	        React.createElement('br', null),
+	        sampleText.summary_2
 	      );
 	    }
 	  },
@@ -23508,6 +23525,8 @@
 	
 	module.exports = {
 	  summary: 'I’m Lindsay, an Ohio State University student with a passion for marketing and entrepreneurship. I have worked at a startup, a multi-billion dollar corporation, and studied everything in between. My experience spans across a wide range of products and services, so I specialize in jumping in with both feet and getting up to speed quickly. I love a challenge and thrive in a dynamic work environment where I get to wear many hats.',
+	  summary_1: 'I have experience in social media, digital marketing, and data analysis. I managed all social media channels at a beverage startup called Life Support. With a focus on growth, I developed and implemented a strategy, created content, and engaged with customers. I have also worked at American Greetings, where I focused on analyzing customer data and past sales metrics to identify opportunities to improve productivity and create future retail strategies.',
+	  summary_2: 'When I’m not working I’m probably on the beach volleyball court, whipping up something in the kitchen, or boarding a plane for my next adventure.',
 	  project1: 'A handspun framework in the style of Rails.',
 	  project2: 'A fruit foraging app built on Rails with a React/Redux frontend.',
 	  project3: 'A simple live chat app written in Node using socket.io.',
