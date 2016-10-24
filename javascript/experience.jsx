@@ -26,12 +26,15 @@ module.exports = React.createClass({
             <img src="assets/icons/access.png" />
             <img src="assets/icons/spss.png" />
             <img src="assets/icons/powerpoint.png" />
+            <img src="assets/icons/wordpress.png" />
             <img src="assets/icons/html5.png" />
             <img src="assets/icons/css3.png" /><br />
             <strong> Data Analysis | </strong>Microsoft Excel, Microsoft Access, SPSS<br /><br />
             <strong>Content Creation | </strong>Adobe Creative Suite, SEO, Blog Writing, WordPress, Press Releases<br /><br />
             <strong>Research | </strong>Survey Building and Analysis, Writing Reports<br /><br />
             <strong>Social Media | </strong>Strategy, Channel Management, Direct Customer Communication<br /><br />
+            <strong>Learning | </strong>SQL, HTML5, CSS3, Javascript, Git, GitHub<br /><br />
+            <br /><br />
           </center>
 
 
@@ -40,7 +43,7 @@ module.exports = React.createClass({
     } else {
       return (
         <pre className="experience-content">
-          { sampleText[this.state.active] }
+          { sampleText.summary }<br/><br />{ sampleText.summary_1 }<br /><br />{ sampleText.summary_2 }
         </pre>
       );
     }
