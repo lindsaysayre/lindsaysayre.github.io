@@ -59,7 +59,7 @@ const App = React.createClass({
           <div className="main-banner-overlay"></div>
           <div className="main-description">
             <h1>LINDSAY SAYRE</h1>
-            <h3>Marketing Strategist and Budding Entrepreneur.</h3>
+            <h3>Marketing Strategist and Aspiring Entrepreneur.</h3>
           </div>
           <div className="down-arrow"
                 onClick={() => this.scrollTo(1)}>

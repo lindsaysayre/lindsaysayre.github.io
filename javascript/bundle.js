@@ -125,7 +125,7 @@
 	            React.createElement(
 	              'h3',
 	              null,
-	              'Marketing Strategist and Budding Entrepreneur.'
+	              'Marketing Strategist and Aspiring Entrepreneur.'
 	            )
 	          ),
 	          React.createElement(
