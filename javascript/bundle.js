@@ -23478,7 +23478,7 @@
 	      React.createElement(
 	        'div',
 	        { className: 'modal-content' },
-	        React.createElement('img', { className: 'resume', src: 'assets/images/BrookeAngel.png' })
+	        React.createElement('img', { className: 'resume', src: 'assets/images/resume.png' })
 	      )
 	    );
 	  },
