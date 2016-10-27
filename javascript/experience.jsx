@@ -22,19 +22,19 @@ module.exports = React.createClass({
       return (
         <pre className="experience-content">
           <center className="icons">
-            <img src="assets/icons/git.png" />
-            <img src="assets/icons/github.png" />
-            <img src="assets/icons/rails.png" />
-            <img src="assets/icons/javascript.png" />
+            <img src="assets/icons/excel.png" />
+            <img src="assets/icons/access.png" />
+            <img src="assets/icons/spss.png" />
+            <img src="assets/icons/powerpoint.png" />
+            <img src="assets/icons/wordpress.png" />
             <img src="assets/icons/html5.png" />
-            <img src="assets/icons/css3.png" />
-            <img src="assets/icons/react.png" /><br />
-            <strong>Version Control Systems | </strong> Git / Github<br /><br />
-            <strong>JavaScript | </strong> JavaScript, React.js, Flux, Redux, Node.js<br /><br />
-            <strong>Ruby | </strong> Ruby, Rails <br /><br />
-            <strong>Testing Frameworks |</strong> RSpec, Capybara, Jest, Jasmine, Mocha<br /><br />
-            <strong>Web Design |</strong> CSS3, HTML5<br /><br />
-            <strong>Misc |</strong> Java, Matlab, Scheme<br /><br />
+            <img src="assets/icons/css3.png" /><br />
+            <strong> Data Analysis | </strong>Microsoft Excel, Microsoft Access, SPSS<br /><br />
+            <strong>Content Creation | </strong>Adobe Creative Suite, SEO, Blog Writing, WordPress, Press Releases<br /><br />
+            <strong>Research | </strong>Survey Building and Analysis, Writing Reports<br /><br />
+            <strong>Social Media | </strong>Strategy, Channel Management, Direct Customer Communication<br /><br />
+            <strong>Learning | </strong>SQL, HTML5, CSS3, Javascript, Git, GitHub<br /><br />
+            <br /><br />
           </center>
 
 
@@ -43,7 +43,7 @@ module.exports = React.createClass({
     } else {
       return (
         <pre className="experience-content">
-          { sampleText[this.state.active] }
+          { sampleText.summary }<br/><br />{ sampleText.summary_1 }<br /><br />{ sampleText.summary_2 }
         </pre>
       );
     }
@@ -108,12 +108,6 @@ module.exports = React.createClass({
                 onClick={() => this.setActive('resume')}>
             <div>
               RESUME
-            </div>
-          </div>
-          <div className={"circle " + this.isActive('teaching')}
-                onClick={() => this.setActive('teaching')}>
-            <div>
-              TEACHING
             </div>
           </div>
           <div className={"circle " + this.isActive('technologies')}

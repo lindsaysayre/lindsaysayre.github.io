@@ -1,7 +1,7 @@
 {
   "name": "lindsaysayre.github.io",
   "version": "1.0.0",
-  "description": "",
+  "description": "Personal Webpage for Lindsay Sayre",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -12,7 +12,7 @@
     "url": "git+https://github.com/lindsaysayre/lindsaysayre.github.io.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "lms",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/lindsaysayre/lindsaysayre.github.io/issues"
@@ -29,8 +29,5 @@
     "react-dom": "^15.2.1",
     "react-modal": "^1.4.0",
     "webpack": "^1.13.1"
-  },
-  "devDependencies": {
-    "webpack": "^1.13.2"
   }
 }
