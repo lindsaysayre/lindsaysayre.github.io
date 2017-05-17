@@ -1,7 +1,16 @@
 const React = require('react');
 const sampleText = require('./sampleText');
+const ReactGA = require('react-ga')
 
 module.exports = React.createClass({
+
+  componentDidMount() {
+      ReactGA.event({
+          category: 'contact',
+          action: 'Contact component load.'
+      });
+  },
+
   render () {
 
     return (

@@ -7,6 +7,13 @@ module.exports = React.createClass({
     return {active: 'summary'};
   },
 
+  componentDidMount() {
+      ReactGA.event({
+          category: 'experince',
+          action: 'Experience component load.'
+      });
+  },
+
   setActive (category) {
     this.setState({active: category});
   },
