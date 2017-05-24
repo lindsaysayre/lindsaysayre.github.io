@@ -27,6 +27,7 @@
     "newrelic": "^1.28.3",
     "react": "^15.2.1",
     "react-dom": "^15.2.1",
+    "react-ga": "^2.1.2",
     "react-modal": "^1.4.0",
     "webpack": "^1.13.1"
   }

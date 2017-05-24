@@ -48,12 +48,13 @@
 	
 	var ReactDOM = __webpack_require__(1);
 	var React = __webpack_require__(166);
-	var Modal = __webpack_require__(172);
-	var MainNav = __webpack_require__(192);
-	var PointNav = __webpack_require__(193);
-	var Experience = __webpack_require__(194);
-	//const Projects = require('./projects');
-	var Contact = __webpack_require__(196);
+	var ReactGA = __webpack_require__(172);
+	var Modal = __webpack_require__(182);
+	var MainNav = __webpack_require__(202);
+	var PointNav = __webpack_require__(203);
+	var Experience = __webpack_require__(204);
+	var Projects = __webpack_require__(206);
+	var Contact = __webpack_require__(207);
 	
 	var App = React.createClass({
 	  displayName: 'App',
@@ -66,6 +67,12 @@
 	    document.addEventListener('scroll', function () {
 	      var newScrollState = Math.round(window.scrollY / window.innerHeight);
 	      _this.setState({ scrollState: newScrollState });
+	    });
+	
+	    ReactGA.initialize('UA-99352749-1', { debug: true });
+	    ReactGA.event({
+	      category: 'main',
+	      action: 'Main component load.'
 	    });
 	  },
 	  setScrollInterval: function setScrollInterval(e) {
@@ -125,7 +132,7 @@
 	            React.createElement(
 	              'h3',
 	              null,
-	              'Marketing Strategist and Aspiring Entrepreneur.'
+	              'Marketing Strategist and Entrepreneur.'
 	            )
 	          ),
 	          React.createElement(
@@ -21271,22 +21278,796 @@
 /* 172 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(173);
+	/**
+	 * React Google Analytics Module
+	 *
+	 * @package react-ga
+	 * @author  Adam Lofting <adam@mozillafoundation.org>
+	 *          Atul Varma <atul@mozillafoundation.org>
+	 */
 	
+	/**
+	 * Utilities
+	 */
+	var format = __webpack_require__(173);
+	var removeLeadingSlash = __webpack_require__(178);
+	var trim = __webpack_require__(176);
+	
+	var warn = __webpack_require__(177);
+	var log = __webpack_require__(179);
+	
+	var _debug = false;
+	var _titleCase = true;
+	
+	var _format = function (s) {
+	  return format(s, _titleCase);
+	};
+	
+	var ReactGA = {
+	  initialize: function (gaTrackingID, options) {
+	    if (!gaTrackingID) {
+	      warn('gaTrackingID is required in initialize()');
+	      return;
+	    }
+	
+	    if (options) {
+	      if (options.debug && options.debug === true) {
+	        _debug = true;
+	      }
+	
+	      if (options.titleCase === false) {
+	        _titleCase = false;
+	      }
+	    }
+	
+	    // https://developers.google.com/analytics/devguides/collection/analyticsjs/
+	    // jscs:disable
+	    (function (i, s, o, g, r, a, m) {
+	      i['GoogleAnalyticsObject'] = r;
+	      i[r] = i[r] || function () {
+	        (i[r].q = i[r].q || []).push(arguments);
+	      }, i[r].l = 1 * new Date();
+	      a = s.createElement(o),
+	          m = s.getElementsByTagName(o)[0];
+	      a.async = 1;
+	      a.src = g;
+	      m.parentNode.insertBefore(a, m);
+	    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+	    // jscs:enable
+	
+	    if (options && options.gaOptions) {
+	      ga('create', gaTrackingID, options.gaOptions);
+	    } else {
+	      ga('create', gaTrackingID, 'auto');
+	    }
+	  },
+	
+	  /**
+	   * ga:
+	   * Returns the original GA object.
+	   */
+	  ga: function () {
+	    if (arguments.length > 0) {
+	      ga.apply(this, arguments);
+	      if (_debug) {
+	        log('called ga(\'arguments\');');
+	        log('with arguments: ' + JSON.stringify([].slice.apply(arguments)));
+	      }
+	
+	      return;
+	    }
+	
+	    return ga;
+	  },
+	
+	  /**
+	   * set:
+	   * GA tracker set method
+	   * @param {Object} fieldsObject - a field/value pair or a group of field/value pairs on the tracker
+	   */
+	  set: function (fieldsObject) {
+	    if (typeof ga === 'function') {
+	      if (!fieldsObject) {
+	        warn('`fieldsObject` is required in .set()');
+	        return;
+	      }
+	
+	      if (typeof fieldsObject !== 'object') {
+	        warn('Expected `fieldsObject` arg to be an Object');
+	        return;
+	      }
+	
+	      if (Object.keys(fieldsObject).length === 0) {
+	        warn('empty `fieldsObject` given to .set()');
+	      }
+	
+	      ga('set', fieldsObject);
+	
+	      if (_debug) {
+	        log('called ga(\'set\', fieldsObject);');
+	        log('with fieldsObject: ' + JSON.stringify(fieldsObject));
+	      }
+	    }
+	  },
+	
+	  /**
+	   * send:
+	   * Clone of the low level `ga.send` method
+	   * WARNING: No validations will be applied to this
+	   * @param  {Object} fieldObject - field object for tracking different analytics
+	   */
+	  send: function (fieldObject) {
+	    if (typeof ga === 'function') {
+	      ga('send', fieldObject);
+	
+	      if (_debug) {
+	        log('called ga(\'send\', fieldObject);');
+	        log('with fieldObject: ' + JSON.stringify(fieldObject));
+	      }
+	    }
+	  },
+	
+	  /**
+	   * pageview:
+	   * Basic GA pageview tracking
+	   * @param  {String} path - the current page page e.g. '/about'
+	   */
+	  pageview: function (path) {
+	    if (!path) {
+	      warn('path is required in .pageview()');
+	      return;
+	    }
+	
+	    path = trim(path);
+	    if (path === '') {
+	      warn('path cannot be an empty string in .pageview()');
+	      return;
+	    }
+	
+	    if (typeof ga === 'function') {
+	      ga('send', 'pageview', path);
+	
+	      if (_debug) {
+	        log('called ga(\'send\', \'pageview\', path);');
+	        log('with path: ' + path);
+	      }
+	    }
+	  },
+	
+	  /**
+	   * modalview:
+	   * a proxy to basic GA pageview tracking to consistently track
+	   * modal views that are an equivalent UX to a traditional pageview
+	   * @param  {String} modalName e.g. 'add-or-edit-club'
+	   */
+	  modalview: function (modalName) {
+	    if (!modalName) {
+	      warn('modalName is required in .modalview(modalName)');
+	      return;
+	    }
+	
+	    modalName = trim(modalName);
+	    modalName = removeLeadingSlash(modalName);
+	
+	    if (modalName === '') {
+	      warn('modalName cannot be an empty string or a single / in .modalview()');
+	      return;
+	    }
+	
+	    if (typeof ga === 'function') {
+	      modalName = trim(modalName);
+	      var path = '/modal/' + modalName;
+	      ga('send', 'pageview', path);
+	
+	      if (_debug) {
+	        log('called ga(\'send\', \'pageview\', path);');
+	        log('with path: ' + path);
+	      }
+	    }
+	  },
+	
+	  /**
+	   * timing:
+	   * GA timing
+	   * @param args.category {String} required
+	   * @param args.variable {String} required
+	   * @param args.value  {Int}  required
+	   * @param args.label  {String} required
+	   */
+	  timing: function (args) {
+	    if (typeof ga === 'function') {
+	      if (!args || !args.category || !args.variable
+	          || !args.value || typeof args.value !== 'number') {
+	        warn('args.category, args.variable ' +
+	              'AND args.value are required in timing() ' +
+	              'AND args.value has to be a number');
+	        return;
+	      }
+	
+	      //Required Fields
+	      var fieldObject = {
+	        hitType: 'timing',
+	        timingCategory: _format(args.category),
+	        timingVar: _format(args.variable),
+	        timingValue: args.value
+	      };
+	
+	      if (args.label) {
+	        fieldObject.timingLabel = _format(args.label);
+	      }
+	
+	      this.send(fieldObject);
+	    }
+	  },
+	
+	  /**
+	   * event:
+	   * GA event tracking
+	   * @param args.category {String} required
+	   * @param args.action {String} required
+	   * @param args.label {String} optional
+	   * @param args.value {Int} optional
+	   * @param args.nonInteraction {boolean} optional
+	   */
+	  event: function (args) {
+	    if (typeof ga === 'function') {
+	
+	      // Simple Validation
+	      if (!args || !args.category || !args.action) {
+	        warn('args.category AND args.action are required in event()');
+	        return;
+	      }
+	
+	      // Required Fields
+	      var fieldObject = {
+	        hitType: 'event',
+	        eventCategory: _format(args.category),
+	        eventAction: _format(args.action)
+	      };
+	
+	      // Optional Fields
+	      if (args.label) {
+	        fieldObject.eventLabel = _format(args.label);
+	      }
+	
+	      if (args.value) {
+	        if (typeof args.value !== 'number') {
+	          warn('Expected `args.value` arg to be a Number.');
+	        } else {
+	          fieldObject.eventValue = args.value;
+	        }
+	      }
+	
+	      if (args.nonInteraction) {
+	        if (typeof args.nonInteraction !== 'boolean') {
+	          warn('`args.nonInteraction` must be a boolean.');
+	        } else {
+	          fieldObject.nonInteraction = args.nonInteraction;
+	        }
+	      }
+	
+	      if (args.transport) {
+	        if (typeof args.transport !== 'string') {
+	          warn('`args.transport` must be a string.');
+	        } else {
+	          if (['beacon', 'xhr', 'image'].indexOf(args.transport) === -1) {
+	            warn('`args.transport` must be either one of these values: `beacon`, `xhr` or `image`');
+	          }
+	
+	          fieldObject.transport = args.transport;
+	        }
+	      }
+	
+	      // Send to GA
+	      this.send(fieldObject);
+	    }
+	  },
+	
+	  /**
+	   * exception:
+	   * GA exception tracking
+	   * @param args.description {String} optional
+	   * @param args.fatal {boolean} optional
+	   */
+	  exception: function (args) {
+	    if (typeof ga === 'function') {
+	
+	      // Required Fields
+	      var fieldObject = {
+	        hitType: 'exception'
+	      };
+	
+	      // Optional Fields
+	      if (args.description) {
+	        fieldObject.exDescription = _format(args.description);
+	      }
+	
+	      if (typeof args.fatal !== 'undefined') {
+	        if (typeof args.fatal !== 'boolean') {
+	          warn('`args.fatal` must be a boolean.');
+	        } else {
+	          fieldObject.exFatal = args.fatal;
+	        }
+	      }
+	
+	      // Send to GA
+	      this.send(fieldObject);
+	    }
+	  },
+	
+	  plugin: {
+	    /**
+	     * require:
+	     * GA requires a plugin
+	     * @param name {String} e.g. 'ecommerce' or 'myplugin'
+	     * @param options {Object} optional e.g {path: '/log', debug: true}
+	     */
+	    require: function (name, options) {
+	      if (typeof ga === 'function') {
+	
+	        // Required Fields
+	        if (!name) {
+	          warn('`name` is required in .require()');
+	          return;
+	        }
+	
+	        name = trim(name);
+	        if (name === '') {
+	          warn('`name` cannot be an empty string in .require()');
+	          return;
+	        }
+	
+	        // Optional Fields
+	        if (options) {
+	          if (typeof options !== 'object') {
+	            warn('Expected `options` arg to be an Object');
+	            return;
+	          }
+	
+	          if (Object.keys(options).length === 0) {
+	            warn('Empty `options` given to .require()');
+	          }
+	
+	          ga('require', name, options);
+	
+	          if (_debug) {
+	            log('called ga(\'require\', \'' + name + '\', ' + JSON.stringify(options) + ');');
+	          }
+	
+	          return;
+	        } else {
+	          ga('require', name);
+	
+	          if (_debug) {
+	            log('called ga(\'require\', \'' + name + '\');');
+	          }
+	
+	          return;
+	        }
+	      }
+	    },
+	
+	    /**
+	     * execute:
+	     * GA execute action for plugin
+	     * Takes variable number of arguments
+	     * @param pluginName {String} e.g. 'ecommerce' or 'myplugin'
+	     * @param action {String} e.g. 'addItem' or 'myCustomAction'
+	     * @param actionType {String} optional e.g. 'detail'
+	     * @param payload {Object} optional e.g { id: '1x5e', name : 'My product to track' }
+	     */
+	    execute: function () {
+	      var args = Array.prototype.slice.call(arguments);
+	
+	      var pluginName = args[0];
+	      var action = args[1];
+	      var payload;
+	      var actionType;
+	
+	      if (args.length === 3) {
+	        payload = args[2];
+	      } else {
+	        actionType = args[2];
+	        payload = args[3];
+	      }
+	
+	      if (typeof ga === 'function') {
+	        if (typeof pluginName !== 'string') {
+	          warn('Expected `pluginName` arg to be a String.');
+	        } else if (typeof action !== 'string') {
+	          warn('Expected `action` arg to be a String.');
+	        } else {
+	          var command = pluginName + ':' + action;
+	          payload = payload || null;
+	          if (actionType && payload) {
+	            ga(command, actionType, payload);
+	            if (_debug) {
+	              log('called ga(\'' + command + '\');');
+	              log('actionType: "' + actionType + '" with payload: ' + JSON.stringify(payload));
+	            }
+	          } else if (payload) {
+	            ga(command, payload);
+	            if (_debug) {
+	              log('called ga(\'' + command + '\');');
+	              log('with payload: ' + JSON.stringify(payload));
+	            }
+	          } else {
+	            ga(command);
+	            if (_debug) {
+	              log('called ga(\'' + command + '\');');
+	            }
+	
+	          }
+	        }
+	      }
+	    }
+	  },
+	
+	  /**
+	   * outboundLink:
+	   * GA outboundLink tracking
+	   * @param args.label {String} e.g. url, or 'Create an Account'
+	   * @param {function} hitCallback - Called after processing a hit.
+	   */
+	  outboundLink: function (args, hitCallback) {
+	    if (typeof hitCallback !== 'function') {
+	      warn('hitCallback function is required');
+	      return;
+	    }
+	
+	    if (typeof ga === 'function') {
+	
+	      // Simple Validation
+	      if (!args || !args.label) {
+	        warn('args.label is required in outboundLink()');
+	        return;
+	      }
+	
+	      // Required Fields
+	      var fieldObject = {
+	        hitType: 'event',
+	        eventCategory: 'Outbound',
+	        eventAction: 'Click',
+	        eventLabel: _format(args.label)
+	      };
+	
+	      var safetyCallbackCalled = false;
+	      var safetyCallback = function () {
+	
+	        // This prevents a delayed response from GA
+	        // causing hitCallback from being fired twice
+	        safetyCallbackCalled = true;
+	
+	        hitCallback();
+	      };
+	
+	      // Using a timeout to ensure the execution of critical application code
+	      // in the case when the GA server might be down
+	      // or an ad blocker prevents sending the data
+	
+	      // register safety net timeout:
+	      var t = setTimeout(safetyCallback, 250);
+	
+	      var clearableCallbackForGA = function () {
+	        clearTimeout(t);
+	        if (!safetyCallbackCalled) {
+	          hitCallback();
+	        }
+	      };
+	
+	      fieldObject.hitCallback = clearableCallbackForGA;
+	
+	      // Send to GA
+	      this.send(fieldObject);
+	    } else {
+	      // if ga is not defined, return the callback so the application
+	      // continues to work as expected
+	      setTimeout(hitCallback, 0);
+	    }
+	  }
+	};
+	
+	var OutboundLink = __webpack_require__(180);
+	OutboundLink.origTrackLink = OutboundLink.trackLink;
+	OutboundLink.trackLink = ReactGA.outboundLink.bind(ReactGA);
+	ReactGA.OutboundLink = OutboundLink;
+	
+	module.exports = ReactGA;
 
 
 /***/ },
 /* 173 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var mightBeEmail = __webpack_require__(174);
+	var toTitleCase = __webpack_require__(175);
+	var warn = __webpack_require__(177);
+	
+	var _redacted = 'REDACTED (Potential Email Address)';
+	
+	function format(s, titleCase) {
+	  if (mightBeEmail(s)) {
+	    warn('This arg looks like an email address, redacting.');
+	    return _redacted;
+	  }
+	
+	  if (titleCase) {
+	    return toTitleCase(s);
+	  }
+	
+	  return s;
+	}
+	
+	module.exports = format;
+
+
+/***/ },
+/* 174 */
+/***/ function(module, exports) {
+
+	// See if s could be an email address. We don't want to send personal data like email.
+	// https://support.google.com/analytics/answer/2795983?hl=en
+	function mightBeEmail(s) {
+	  // There's no point trying to validate rfc822 fully, just look for ...@...
+	  return (/[^@]+@[^@]+/).test(s);
+	}
+	
+	module.exports = mightBeEmail;
+
+
+/***/ },
+/* 175 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/**
+	 * To Title Case 2.1 - http://individed.com/code/to-title-case/
+	 * Copyright 2008-2013 David Gouch. Licensed under the MIT License.
+	 * https://github.com/gouch/to-title-case
+	 */
+	
+	var trim = __webpack_require__(176);
+	
+	function toTitleCase(s) {
+	  var smallWords = /^(a|an|and|as|at|but|by|en|for|if|in|nor|of|on|or|per|the|to|vs?\.?|via)$/i;
+	  s = trim(s);
+	
+	  return s.replace(/[A-Za-z0-9\u00C0-\u00FF]+[^\s-]*/g, function (match, index, title) {
+	    if (index > 0 &&
+	        index + match.length !== title.length &&
+	        match.search(smallWords) > -1 &&
+	        title.charAt(index - 2) !== ':' &&
+	        (title.charAt(index + match.length) !== '-' || title.charAt(index - 1) === '-') &&
+	        title.charAt(index - 1).search(/[^\s-]/) < 0) {
+	      return match.toLowerCase();
+	    }
+	
+	    if (match.substr(1).search(/[A-Z]|\../) > -1) {
+	      return match;
+	    }
+	
+	    return match.charAt(0).toUpperCase() + match.substr(1);
+	  });
+	}
+	
+	module.exports = toTitleCase;
+
+
+/***/ },
+/* 176 */
+/***/ function(module, exports) {
+
+	// GA strings need to have leading/trailing whitespace trimmed, and not all
+	// browsers have String.prototoype.trim().
+	
+	function trim(s) {
+	  return s.replace(/^\s+|\s+$/g, '');
+	}
+	
+	module.exports = trim;
+
+
+/***/ },
+/* 177 */
+/***/ function(module, exports) {
+
+	function warn(s) {
+	  console.warn('[react-ga]', s);
+	}
+	
+	module.exports = warn;
+
+
+/***/ },
+/* 178 */
+/***/ function(module, exports) {
+
+	function removeLeadingSlash(s) {
+	  if (s.substring(0, 1) === '/') {
+	    s = s.substring(1);
+	  }
+	
+	  return s;
+	}
+	
+	module.exports = removeLeadingSlash;
+
+
+/***/ },
+/* 179 */
+/***/ function(module, exports) {
+
+	function log(s) {
+	  console.info('[react-ga]', s);
+	}
+	
+	module.exports = log;
+
+
+/***/ },
+/* 180 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var React = __webpack_require__(166);
+	var assign = __webpack_require__(181);
+	
+	var NEWTAB = '_blank';
+	
+	var OutboundLink = React.createClass({
+	  displayName: 'OutboundLink',
+	  propTypes: {
+	    eventLabel: React.PropTypes.string.isRequired
+	  },
+	  statics: {
+	    trackLink: function () {
+	      console.warn('ga tracking not enabled');
+	    }
+	  },
+	  handleClick: function (e) {
+	    e.preventDefault();
+	    var props = this.props;
+	    var eventMeta = { label: props.eventLabel };
+	    OutboundLink.trackLink(eventMeta, function () {
+	      if (props.target === NEWTAB) {
+	        window.open(props.to, NEWTAB);
+	      } else {
+	        window.location.href = props.to;
+	      }
+	    });
+	
+	    if (props.onClick) {
+	      props.onClick(e);
+	    }
+	  },
+	
+	  render: function () {
+	    var props = assign({}, this.props, {
+	      href: this.props.to,
+	      onClick: this.handleClick
+	    });
+	    delete props.eventLabel;
+	    return React.createElement('a', props);
+	  }
+	});
+	
+	module.exports = OutboundLink;
+
+
+/***/ },
+/* 181 */
+/***/ function(module, exports) {
+
+	/*
+	object-assign
+	(c) Sindre Sorhus
+	@license MIT
+	*/
+	
+	'use strict';
+	/* eslint-disable no-unused-vars */
+	var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+	var hasOwnProperty = Object.prototype.hasOwnProperty;
+	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+	
+	function toObject(val) {
+		if (val === null || val === undefined) {
+			throw new TypeError('Object.assign cannot be called with null or undefined');
+		}
+	
+		return Object(val);
+	}
+	
+	function shouldUseNative() {
+		try {
+			if (!Object.assign) {
+				return false;
+			}
+	
+			// Detect buggy property enumeration order in older V8 versions.
+	
+			// https://bugs.chromium.org/p/v8/issues/detail?id=4118
+			var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
+			test1[5] = 'de';
+			if (Object.getOwnPropertyNames(test1)[0] === '5') {
+				return false;
+			}
+	
+			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+			var test2 = {};
+			for (var i = 0; i < 10; i++) {
+				test2['_' + String.fromCharCode(i)] = i;
+			}
+			var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+				return test2[n];
+			});
+			if (order2.join('') !== '0123456789') {
+				return false;
+			}
+	
+			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+			var test3 = {};
+			'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+				test3[letter] = letter;
+			});
+			if (Object.keys(Object.assign({}, test3)).join('') !==
+					'abcdefghijklmnopqrst') {
+				return false;
+			}
+	
+			return true;
+		} catch (err) {
+			// We don't expect any of the above to throw, but better to be safe.
+			return false;
+		}
+	}
+	
+	module.exports = shouldUseNative() ? Object.assign : function (target, source) {
+		var from;
+		var to = toObject(target);
+		var symbols;
+	
+		for (var s = 1; s < arguments.length; s++) {
+			from = Object(arguments[s]);
+	
+			for (var key in from) {
+				if (hasOwnProperty.call(from, key)) {
+					to[key] = from[key];
+				}
+			}
+	
+			if (getOwnPropertySymbols) {
+				symbols = getOwnPropertySymbols(from);
+				for (var i = 0; i < symbols.length; i++) {
+					if (propIsEnumerable.call(from, symbols[i])) {
+						to[symbols[i]] = from[symbols[i]];
+					}
+				}
+			}
+		}
+	
+		return to;
+	};
+
+
+/***/ },
+/* 182 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(183);
+	
+
+
+/***/ },
+/* 183 */
+/***/ function(module, exports, __webpack_require__) {
+
 	/* WEBPACK VAR INJECTION */(function(process) {var React = __webpack_require__(166);
 	var ReactDOM = __webpack_require__(1);
-	var ExecutionEnvironment = __webpack_require__(174);
-	var ModalPortal = React.createFactory(__webpack_require__(175));
-	var ariaAppHider = __webpack_require__(190);
-	var elementClass = __webpack_require__(191);
+	var ExecutionEnvironment = __webpack_require__(184);
+	var ModalPortal = React.createFactory(__webpack_require__(185));
+	var ariaAppHider = __webpack_require__(200);
+	var elementClass = __webpack_require__(201);
 	var renderSubtreeIntoContainer = __webpack_require__(1).unstable_renderSubtreeIntoContainer;
-	var Assign = __webpack_require__(179);
+	var Assign = __webpack_require__(189);
 	
 	var SafeHTMLElement = ExecutionEnvironment.canUseDOM ? window.HTMLElement : {};
 	var AppElement = ExecutionEnvironment.canUseDOM ? document.body : {appendChild: function() {}};
@@ -21394,7 +22175,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 174 */
+/* 184 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -21439,14 +22220,14 @@
 
 
 /***/ },
-/* 175 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(166);
 	var div = React.DOM.div;
-	var focusManager = __webpack_require__(176);
-	var scopeTab = __webpack_require__(178);
-	var Assign = __webpack_require__(179);
+	var focusManager = __webpack_require__(186);
+	var scopeTab = __webpack_require__(188);
+	var Assign = __webpack_require__(189);
 	
 	// so that our CSS is statically analyzable
 	var CLASS_NAMES = {
@@ -21637,10 +22418,10 @@
 
 
 /***/ },
-/* 176 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var findTabbable = __webpack_require__(177);
+	var findTabbable = __webpack_require__(187);
 	var modalElement = null;
 	var focusLaterElement = null;
 	var needToFocus = false;
@@ -21711,7 +22492,7 @@
 
 
 /***/ },
-/* 177 */
+/* 187 */
 /***/ function(module, exports) {
 
 	/*!
@@ -21767,10 +22548,10 @@
 
 
 /***/ },
-/* 178 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var findTabbable = __webpack_require__(177);
+	var findTabbable = __webpack_require__(187);
 	
 	module.exports = function(node, event) {
 	  var tabbable = findTabbable(node);
@@ -21792,7 +22573,7 @@
 
 
 /***/ },
-/* 179 */
+/* 189 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -21803,9 +22584,9 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseAssign = __webpack_require__(180),
-	    createAssigner = __webpack_require__(186),
-	    keys = __webpack_require__(182);
+	var baseAssign = __webpack_require__(190),
+	    createAssigner = __webpack_require__(196),
+	    keys = __webpack_require__(192);
 	
 	/**
 	 * A specialized version of `_.assign` for customizing assigned values without
@@ -21878,7 +22659,7 @@
 
 
 /***/ },
-/* 180 */
+/* 190 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -21889,8 +22670,8 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var baseCopy = __webpack_require__(181),
-	    keys = __webpack_require__(182);
+	var baseCopy = __webpack_require__(191),
+	    keys = __webpack_require__(192);
 	
 	/**
 	 * The base implementation of `_.assign` without support for argument juggling,
@@ -21911,7 +22692,7 @@
 
 
 /***/ },
-/* 181 */
+/* 191 */
 /***/ function(module, exports) {
 
 	/**
@@ -21949,7 +22730,7 @@
 
 
 /***/ },
-/* 182 */
+/* 192 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -21960,9 +22741,9 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var getNative = __webpack_require__(183),
-	    isArguments = __webpack_require__(184),
-	    isArray = __webpack_require__(185);
+	var getNative = __webpack_require__(193),
+	    isArguments = __webpack_require__(194),
+	    isArray = __webpack_require__(195);
 	
 	/** Used to detect unsigned integer values. */
 	var reIsUint = /^\d+$/;
@@ -22191,7 +22972,7 @@
 
 
 /***/ },
-/* 183 */
+/* 193 */
 /***/ function(module, exports) {
 
 	/**
@@ -22334,7 +23115,7 @@
 
 
 /***/ },
-/* 184 */
+/* 194 */
 /***/ function(module, exports) {
 
 	/**
@@ -22569,7 +23350,7 @@
 
 
 /***/ },
-/* 185 */
+/* 195 */
 /***/ function(module, exports) {
 
 	/**
@@ -22755,7 +23536,7 @@
 
 
 /***/ },
-/* 186 */
+/* 196 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -22766,9 +23547,9 @@
 	 * Copyright 2009-2015 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
 	 * Available under MIT license <https://lodash.com/license>
 	 */
-	var bindCallback = __webpack_require__(187),
-	    isIterateeCall = __webpack_require__(188),
-	    restParam = __webpack_require__(189);
+	var bindCallback = __webpack_require__(197),
+	    isIterateeCall = __webpack_require__(198),
+	    restParam = __webpack_require__(199);
 	
 	/**
 	 * Creates a function that assigns properties of source object(s) to a given
@@ -22813,7 +23594,7 @@
 
 
 /***/ },
-/* 187 */
+/* 197 */
 /***/ function(module, exports) {
 
 	/**
@@ -22884,7 +23665,7 @@
 
 
 /***/ },
-/* 188 */
+/* 198 */
 /***/ function(module, exports) {
 
 	/**
@@ -23022,7 +23803,7 @@
 
 
 /***/ },
-/* 189 */
+/* 199 */
 /***/ function(module, exports) {
 
 	/**
@@ -23095,7 +23876,7 @@
 
 
 /***/ },
-/* 190 */
+/* 200 */
 /***/ function(module, exports) {
 
 	var _element = typeof document !== 'undefined' ? document.body : null;
@@ -23143,7 +23924,7 @@
 
 
 /***/ },
-/* 191 */
+/* 201 */
 /***/ function(module, exports) {
 
 	module.exports = function(opts) {
@@ -23208,7 +23989,7 @@
 
 
 /***/ },
-/* 192 */
+/* 202 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -23257,7 +24038,7 @@
 	});
 
 /***/ },
-/* 193 */
+/* 203 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -23313,19 +24094,27 @@
 	});
 
 /***/ },
-/* 194 */
+/* 204 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var React = __webpack_require__(166);
-	var Modal = __webpack_require__(172);
-	var sampleText = __webpack_require__(195);
+	var Modal = __webpack_require__(182);
+	var sampleText = __webpack_require__(205);
+	var ReactGA = __webpack_require__(172);
 	
 	module.exports = React.createClass({
 	  displayName: 'exports',
 	  getInitialState: function getInitialState() {
 	    return { active: 'summary' };
+	  },
+	  componentDidMount: function componentDidMount() {
+	    ReactGA.initialize('UA-99352749-1', { debug: true });
+	    ReactGA.event({
+	      category: 'experince',
+	      action: 'Experience component load.'
+	    });
 	  },
 	  setActive: function setActive(category) {
 	    this.setState({ active: category });
@@ -23518,7 +24307,7 @@
 	});
 
 /***/ },
-/* 195 */
+/* 205 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -23534,16 +24323,247 @@
 	};
 
 /***/ },
-/* 196 */
+/* 206 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	var React = __webpack_require__(166);
-	var sampleText = __webpack_require__(195);
+	var sampleText = __webpack_require__(205);
 	
 	module.exports = React.createClass({
 	  displayName: 'exports',
+	  getInitialState: function getInitialState() {
+	    return { focused: 0 };
+	  },
+	  componentDidMount: function componentDidMount() {
+	    var _this = this;
+	
+	    this.resumeInterval();
+	    addEventListener('resize', function () {
+	      if (window.innerWidth > 800) {
+	        _this.resumeInterval();
+	      } else {
+	        _this.arrestInterval();
+	        _this.setState({ focused: 0 });
+	      }
+	    });
+	  },
+	  arrestInterval: function arrestInterval() {
+	    clearInterval(this.interval);
+	    this.interval = undefined;
+	  },
+	  resumeInterval: function resumeInterval() {
+	    var _this2 = this;
+	
+	    if (!this.interval && window.innerWidth > 800) {
+	      this.interval = setInterval(function () {
+	        return _this2.onRightArrow();
+	      }, 3000);
+	    }
+	  },
+	  componentWillUnmount: function componentWillUnmount() {
+	    this.arrestInterval();
+	  },
+	  onRightArrow: function onRightArrow() {
+	    this.setState({ focused: (this.state.focused + 1) % 4 });
+	  },
+	  onLeftArrow: function onLeftArrow() {
+	    this.setState({ focused: (this.state.focused - 1 + 4) % 4 });
+	  },
+	  getSliderStyle: function getSliderStyle() {
+	    return { marginLeft: -(this.state.focused * window.innerWidth * 0.62) };
+	  },
+	  render: function render() {
+	    var _this3 = this;
+	
+	    return React.createElement(
+	      'div',
+	      null,
+	      React.createElement(
+	        'div',
+	        { className: 'project-container-container' },
+	        React.createElement('i', { className: 'fa fa-chevron-left fa-4x mobile-disappear', onClick: this.onLeftArrow }),
+	        React.createElement(
+	          'div',
+	          { className: 'project-container' },
+	          React.createElement(
+	            'div',
+	            { className: 'project-slider',
+	              onMouseEnter: this.arrestInterval,
+	              onMouseLeave: this.resumeInterval,
+	              style: this.getSliderStyle() },
+	            React.createElement(
+	              'div',
+	              { className: 'project project-1' },
+	              React.createElement(
+	                'div',
+	                { className: 'project-overlay' },
+	                React.createElement(
+	                  'h1',
+	                  null,
+	                  'Miniframe'
+	                ),
+	                React.createElement(
+	                  'p',
+	                  null,
+	                  sampleText.project1
+	                ),
+	                React.createElement(
+	                  'div',
+	                  null,
+	                  React.createElement(
+	                    'a',
+	                    { href: 'https://github.com/brookeangel/railslite', alt: 'Github', target: '_blank' },
+	                    React.createElement('i', { className: 'fa fa-github fa-4x', 'aria-hidden': 'true' })
+	                  ),
+	                  React.createElement(
+	                    'a',
+	                    { href: 'https://miniframe.herokuapp.com/', alt: 'See it live!', target: '_blank' },
+	                    React.createElement('i', { className: 'fa fa-external-link fa-4x', 'aria-hidden': 'true' })
+	                  )
+	                )
+	              )
+	            ),
+	            React.createElement(
+	              'div',
+	              { className: 'project project-2' },
+	              React.createElement(
+	                'div',
+	                { className: 'project-overlay' },
+	                React.createElement(
+	                  'h1',
+	                  null,
+	                  'Harvst'
+	                ),
+	                React.createElement(
+	                  'p',
+	                  null,
+	                  sampleText.project2
+	                ),
+	                React.createElement(
+	                  'div',
+	                  null,
+	                  React.createElement(
+	                    'a',
+	                    { href: 'https://github.com/brookeangel/Harvest', alt: 'Github', target: '_blank' },
+	                    React.createElement('i', { className: 'fa fa-github fa-4x', 'aria-hidden': 'true' })
+	                  ),
+	                  React.createElement(
+	                    'a',
+	                    { href: 'http://www.harvst.xyz/', alt: 'See it live!', target: '_blank' },
+	                    React.createElement('i', { className: 'fa fa-external-link fa-4x', 'aria-hidden': 'true' })
+	                  )
+	                )
+	              )
+	            ),
+	            React.createElement(
+	              'div',
+	              { className: 'project project-3' },
+	              React.createElement(
+	                'div',
+	                { className: 'project-overlay' },
+	                React.createElement(
+	                  'h1',
+	                  null,
+	                  'Chitty Chat'
+	                ),
+	                React.createElement(
+	                  'p',
+	                  null,
+	                  sampleText.project3
+	                ),
+	                React.createElement(
+	                  'div',
+	                  null,
+	                  React.createElement(
+	                    'a',
+	                    { href: 'https://github.com/brookeangel/chitty_chat', alt: 'Github', target: '_blank' },
+	                    React.createElement('i', { className: 'fa fa-github fa-4x', 'aria-hidden': 'true' })
+	                  )
+	                )
+	              )
+	            ),
+	            React.createElement(
+	              'div',
+	              { className: 'project project-4' },
+	              React.createElement(
+	                'div',
+	                { className: 'project-overlay' },
+	                React.createElement(
+	                  'h1',
+	                  null,
+	                  'Jquery Snake'
+	                ),
+	                React.createElement(
+	                  'p',
+	                  null,
+	                  sampleText.project4
+	                ),
+	                React.createElement(
+	                  'div',
+	                  null,
+	                  React.createElement(
+	                    'a',
+	                    { href: 'https://github.com/brookeangel/jquery_snake', alt: 'Github', target: '_blank' },
+	                    React.createElement('i', { className: 'fa fa-github fa-4x', 'aria-hidden': 'true' })
+	                  ),
+	                  React.createElement(
+	                    'a',
+	                    { href: 'http://brookeangel.github.io/jquery_snake/', alt: 'See it live!', target: '_blank' },
+	                    React.createElement('i', { className: 'fa fa-external-link fa-4x', 'aria-hidden': 'true' })
+	                  )
+	                )
+	              )
+	            )
+	          )
+	        ),
+	        React.createElement('i', { className: 'fa fa-chevron-right fa-4x mobile-disappear',
+	          onClick: this.onRightArrow })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'project-nav mobile-disappear' },
+	        React.createElement('div', { className: this.state.focused === 0 ? 'project-nav-button active' : 'project-nav-button',
+	          onClick: function onClick() {
+	            return _this3.setState({ focused: 0 });
+	          } }),
+	        React.createElement('div', { className: this.state.focused === 1 ? 'project-nav-button active' : 'project-nav-button',
+	          onClick: function onClick() {
+	            return _this3.setState({ focused: 1 });
+	          } }),
+	        React.createElement('div', { className: this.state.focused === 2 ? 'project-nav-button active' : 'project-nav-button',
+	          onClick: function onClick() {
+	            return _this3.setState({ focused: 2 });
+	          } }),
+	        React.createElement('div', { className: this.state.focused === 3 ? 'project-nav-button active' : 'project-nav-button',
+	          onClick: function onClick() {
+	            return _this3.setState({ focused: 3 });
+	          } })
+	      )
+	    );
+	  }
+	});
+
+/***/ },
+/* 207 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var React = __webpack_require__(166);
+	var sampleText = __webpack_require__(205);
+	var ReactGA = __webpack_require__(172);
+	
+	module.exports = React.createClass({
+	  displayName: 'exports',
+	  componentDidMount: function componentDidMount() {
+	    ReactGA.initialize('UA-99352749-1', { debug: true });
+	    ReactGA.event({
+	      category: 'contact',
+	      action: 'Contact component load.'
+	    });
+	  },
 	  render: function render() {
 	
 	    return React.createElement(

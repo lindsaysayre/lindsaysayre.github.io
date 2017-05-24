@@ -1,10 +1,11 @@
 const ReactDOM = require('react-dom');
 const React = require('react');
+const ReactGA = require('react-ga');
 const Modal = require('react-modal');
 const MainNav = require('./main_nav');
 const PointNav = require('./point_nav');
 const Experience = require('./experience');
-//const Projects = require('./projects');
+const Projects = require('./projects');
 const Contact = require('./contact');
 
 const App = React.createClass({
@@ -16,6 +17,12 @@ const App = React.createClass({
     document.addEventListener('scroll', () => {
       let newScrollState = Math.round(window.scrollY / window.innerHeight);
       this.setState({scrollState: newScrollState});
+    });
+
+      ReactGA.initialize('UA-99352749-1', { debug: true });
+      ReactGA.event({
+        category: 'main',
+        action: 'Main component load.'
     });
   },
 
@@ -34,8 +41,7 @@ const App = React.createClass({
     clearInterval(this.scrollInterval);
 
     this.scrollInterval = setInterval(() => {
-        if ((window.scrollY > scrollHeight + 5) ||
-            (window.scrollY < scrollHeight - 5)) {
+        if ((window.scrollY > scrollHeight + 5) || (window.scrollY < scrollHeight - 5)) {
             const factor = Math.abs(window.scrollY - scrollHeight);
             let diff = window.scrollY < scrollHeight ? 2 : -2;
             if (factor > 50) diff *= 5;
@@ -49,6 +55,7 @@ const App = React.createClass({
   },
 
   render () {
+
     return(
       <main>
         <MainNav mainLogoClick={() => this.scrollTo(0)} />
@@ -59,7 +66,7 @@ const App = React.createClass({
           <div className="main-banner-overlay"></div>
           <div className="main-description">
             <h1>LINDSAY SAYRE</h1>
-            <h3>Marketing Strategist and Aspiring Entrepreneur.</h3>
+            <h3>Marketing Strategist and Entrepreneur.</h3>
           </div>
           <div className="down-arrow"
                 onClick={() => this.scrollTo(1)}>
