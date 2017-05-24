@@ -68,6 +68,12 @@
 	      var newScrollState = Math.round(window.scrollY / window.innerHeight);
 	      _this.setState({ scrollState: newScrollState });
 	    });
+	
+	    ReactGA.initialize('UA-99352749-1', { debug: true });
+	    ReactGA.event({
+	      category: 'main',
+	      action: 'Main component load.'
+	    });
 	  },
 	  setScrollInterval: function setScrollInterval(e) {
 	    var siblings = e.currentTarget.parentElement.children;
@@ -126,7 +132,7 @@
 	            React.createElement(
 	              'h3',
 	              null,
-	              'Marketing Strategist and Aspiring Entrepreneur.'
+	              'Marketing Strategist and Entrepreneur.'
 	            )
 	          ),
 	          React.createElement(
@@ -24096,11 +24102,19 @@
 	var React = __webpack_require__(166);
 	var Modal = __webpack_require__(182);
 	var sampleText = __webpack_require__(205);
+	var ReactGA = __webpack_require__(172);
 	
 	module.exports = React.createClass({
 	  displayName: 'exports',
 	  getInitialState: function getInitialState() {
 	    return { active: 'summary' };
+	  },
+	  componentDidMount: function componentDidMount() {
+	    ReactGA.initialize('UA-99352749-1', { debug: true });
+	    ReactGA.event({
+	      category: 'experince',
+	      action: 'Experience component load.'
+	    });
 	  },
 	  setActive: function setActive(category) {
 	    this.setState({ active: category });
@@ -24539,9 +24553,17 @@
 	
 	var React = __webpack_require__(166);
 	var sampleText = __webpack_require__(205);
+	var ReactGA = __webpack_require__(172);
 	
 	module.exports = React.createClass({
 	  displayName: 'exports',
+	  componentDidMount: function componentDidMount() {
+	    ReactGA.initialize('UA-99352749-1', { debug: true });
+	    ReactGA.event({
+	      category: 'contact',
+	      action: 'Contact component load.'
+	    });
+	  },
 	  render: function render() {
 	
 	    return React.createElement(

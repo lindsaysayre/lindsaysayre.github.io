@@ -1,6 +1,7 @@
 const React = require('react');
 const Modal = require('react-modal');
 const sampleText = require('./sampleText');
+const ReactGA = require('react-ga');
 
 module.exports = React.createClass({
   getInitialState () {
@@ -8,6 +9,7 @@ module.exports = React.createClass({
   },
 
   componentDidMount() {
+      ReactGA.initialize('UA-99352749-1', { debug: true });
       ReactGA.event({
           category: 'experince',
           action: 'Experience component load.'

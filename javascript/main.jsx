@@ -11,8 +11,6 @@ const Contact = require('./contact');
 const App = React.createClass({
   getInitialState () {
     return {scrollState: 0};
-
-    ReactGA.initialize('UA-99352749-1');
   },
 
   componentDidMount () {
@@ -21,15 +19,11 @@ const App = React.createClass({
       this.setState({scrollState: newScrollState});
     });
 
-        ReactGA.event({
-          category: 'main',
-          action: 'Main component load.'
+      ReactGA.initialize('UA-99352749-1', { debug: true });
+      ReactGA.event({
+        category: 'main',
+        action: 'Main component load.'
     });
-  },
-
-  logPageView() {
-        ReactGA.set({ page: window.location.pathname + window.location.search });
-        ReactGA.pageview(window.location.pathname + window.location.search);
   },
 
   setScrollInterval (e) {
@@ -61,7 +55,7 @@ const App = React.createClass({
   },
 
   render () {
-      this.logPageView();
+
     return(
       <main>
         <MainNav mainLogoClick={() => this.scrollTo(0)} />
@@ -72,7 +66,7 @@ const App = React.createClass({
           <div className="main-banner-overlay"></div>
           <div className="main-description">
             <h1>LINDSAY SAYRE</h1>
-            <h3>Marketing Strategist and Aspiring Entrepreneur.</h3>
+            <h3>Marketing Strategist and Entrepreneur.</h3>
           </div>
           <div className="down-arrow"
                 onClick={() => this.scrollTo(1)}>
