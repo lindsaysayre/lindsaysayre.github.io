@@ -1,34 +1,23 @@
 {
   "name": "lindsaysayre.github.io",
-  "version": "1.0.0",
-  "description": "Personal Webpage for Lindsay Sayre",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "http-server"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/lindsaysayre/lindsaysayre.github.io.git"
-  },
-  "keywords": [],
-  "author": "lms",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/lindsaysayre/lindsaysayre.github.io/issues"
-  },
-  "homepage": "https://github.com/lindsaysayre/lindsaysayre.github.io#readme",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "babel-core": "^6.10.4",
-    "babel-loader": "^6.2.4",
-    "babel-preset-es2015": "^6.9.0",
-    "babel-preset-react": "^6.11.1",
-    "http-server": "^0.9.0",
-    "newrelic": "^1.28.3",
-    "react": "^15.2.1",
-    "react-dom": "^15.2.1",
-    "react-ga": "^2.1.2",
-    "react-modal": "^1.4.0",
-    "webpack": "^1.13.1"
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-ga": "^2.2.0",
+    "react-modal": "^1.7.7"
+  },
+  "devDependencies": {
+    "gh-pages": "^0.12.0",
+    "react-scripts": "1.0.6"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   }
 }
