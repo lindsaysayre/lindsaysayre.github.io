@@ -26,19 +26,19 @@ class Experience extends React.Component {
     }
 
     activeContent() {
-        if (this.state.active == 'resume') {
+        if (this.state.active === 'resume') {
             return this.getModal();
-        } else if (this.state.active == 'technologies') {
+        } else if (this.state.active === 'technologies') {
             return (
                 <pre className="experience-content">
                   <center className="icons">
-                    <img src="assets/icons/excel.png"/>
-                    <img src="assets/icons/access.png"/>
-                    <img src="assets/icons/spss.png"/>
-                    <img src="assets/icons/powerpoint.png"/>
-                    <img src="assets/icons/wordpress.png"/>
-                    <img src="assets/icons/html5.png"/>
-                    <img src="assets/icons/css3.png"/><br />
+                    <img src="assets/icons/excel.png" alt="excel"/>
+                    <img src="assets/icons/access.png" alt="access"/>
+                    <img src="assets/icons/spss.png" alt="spss"/>
+                    <img src="assets/icons/powerpoint.png" alt="excel"/>
+                    <img src="assets/icons/wordpress.png" alt="wordpress"/>
+                    <img src="assets/icons/html5.png" alt="html5"/>
+                    <img src="assets/icons/css3.png" alt="css3"/><br />
                     <strong> Data Analysis | </strong>Microsoft Excel, Microsoft Access, SPSS<br /><br />
                     <strong>Content Creation | </strong>Adobe Creative Suite, SEO, Blog Writing, WordPress, Press Releases<br /><br />
                     <strong>Research | </strong>Survey Building and Analysis, Writing Reports<br /><br />
@@ -76,7 +76,7 @@ class Experience extends React.Component {
             }
         });
 
-        const loader = (
+        /*const loader = (
             <div className="center-spinner">
                 <div className="spinner">
                     <div className="bounce1"></div>
@@ -85,6 +85,7 @@ class Experience extends React.Component {
                 </div>
             </div>
         );
+        */
 
         return (
             <Modal
@@ -92,12 +93,11 @@ class Experience extends React.Component {
                 style={modalStyle}
                 onRequestClose={ () => this.setState({active: 'summary'}) }
             >
-                <div className="x-button"
-                     onClick={() => this.setState({active: 'summary'})}>
+                <div className="x-button" onClick={() => this.setState({active: 'summary'})}>
                     <i className="fa fa-times-circle fa-2x" aria-hidden="true"></i>
                 </div>
                 <div className="modal-content">
-                    <img className="resume" src="assets/images/resume.png"/>
+                    <img className="resume" src="assets/images/resume.png" alt="resume"/>
                 </div>
             </Modal>);
     }
@@ -129,7 +129,6 @@ class Experience extends React.Component {
             </div>
         );
     }
-}
-;
+};
 
 export default Experience;

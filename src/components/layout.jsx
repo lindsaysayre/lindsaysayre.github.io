@@ -99,6 +99,9 @@ class Layout extends React.Component {
                     <section id="experience">
                         <Experience />
                     </section>
+                    <section id="projects">
+                        <Projects />
+                    </section>
                     <section id="contact">
                         <Contact upArrowClick={scrollToTop}/>
                     </section>

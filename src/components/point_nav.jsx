@@ -22,8 +22,14 @@ class PointNav extends React.Component {
 
                 <a onClick={this.props.setScrollTarget}
                    className={this.props.scrollIndex === 2 ? 'active' : ''}>
-                  <i className="fa fa-info fa-2x"></i>
-                  <p>Contact</p>
+                  <i className="fa fa-code fa-2x"></i>
+                    <p>Projects</p>
+                </a>
+
+                <a onClick={this.props.setScrollTarget}
+                   className={this.props.scrollIndex === 3 ? 'active' : ''}>
+                    <i className="fa fa-info fa-2x"></i>
+                    <p>Contact</p>
                 </a>
               </nav>
             </div>

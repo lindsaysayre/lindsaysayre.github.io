@@ -329,24 +329,16 @@ a {
 }
 
 .project-1 {
-  background-image: url('../assets/images/miniframe-router.png');
+  background-image: url('../assets/images/ramenrevolt.png');
 }
 
 .project-2 {
-  background-image: url('../assets/images/harvst.png');
-}
-
-.project-3 {
-  background-image: url('../assets/images/chitty-chat.png');
-}
-
-.project-4 {
-  background-image: url('../assets/images/jquery-snake.png');
+  background-image: url('../assets/images/Memorial Day 4x6.png');
 }
 
 .project-nav {
   display: flex;
-  width: 300px;
+  width: 150px;
   justify-content: space-around;
   align-items: center;
   margin: auto;
