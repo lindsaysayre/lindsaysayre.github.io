@@ -7,6 +7,7 @@ class Experience extends React.Component {
     constructor(props) {
         super(props);
         this.state = {active: 'summary'};
+
     }
 
     componentDidMount() {
@@ -58,7 +59,12 @@ class Experience extends React.Component {
     }
 
     getModal() {
-        let modalStyle = ({
+        ReactGA.event({
+            category: 'resume',
+            action: 'Opened resume.'
+        });
+
+        const modalStyle = ({
             overlay: {
                 position: 'fixed',
                 backgroundColor: 'rgba(255, 255, 255, 0.75)',
@@ -93,11 +99,11 @@ class Experience extends React.Component {
                 style={modalStyle}
                 onRequestClose={ () => this.setState({active: 'summary'}) }
             >
-                <div className="x-button" onClick={() => this.setState({active: 'summary'})}>
-                    <i className="fa fa-times-circle fa-2x" aria-hidden="true"></i>
-                </div>
                 <div className="modal-content">
                     <img className="resume" src="assets/images/resume.png" alt="resume"/>
+                </div>
+                <div className="x-button" onClick={() => this.setState({active: 'summary'})}>
+                    <i className="fa fa-times-circle fa-2x" aria-hidden="false"></i>
                 </div>
             </Modal>);
     }
@@ -107,19 +113,19 @@ class Experience extends React.Component {
             <div className="experience">
                 <div className="experience-circles">
                     <div className={"circle " + this.isActive('summary')}
-                         onClick={() => this.setActive('summary')}>
+                         onClick={this.setActive.bind(this, 'summary')}>
                         <div>
                             ABOUT ME
                         </div>
                     </div>
                     <div className={"circle " + this.isActive('resume')}
-                         onClick={() => this.setActive('resume')}>
+                         onClick={this.setActive.bind(this, 'resume')}>
                         <div>
                             RESUME
                         </div>
                     </div>
                     <div className={"circle " + this.isActive('technologies')}
-                         onClick={() => this.setActive('technologies')}>
+                         onClick={this.setActive.bind(this, 'technologies')}>
                         <div>
                             SKILLS
                         </div>
