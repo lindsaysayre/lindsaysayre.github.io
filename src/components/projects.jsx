@@ -85,12 +85,6 @@ class Projects extends React.Component {
                                 <div className="project-overlay">
                                     <h1>Marketing Consultant</h1>
                                     <p>{sampleText.project2}</p>
-                                    <div>
-                                        <a href="#" alt="See it live!"
-                                           target="_blank" rel="noopener noreferrer">
-                                            <i className="fa fa-external-link fa-4x" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
                                 </div>
                             </div>
 
