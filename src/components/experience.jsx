@@ -51,9 +51,9 @@ class Experience extends React.Component {
             );
         } else {
             return (
-                <pre className="experience-content">
-                    { sampleText.summary }<br/><br />{ sampleText.summary_1 }<br /><br />{ sampleText.summary_2 }
-                </pre>
+                <div className="experience-content">
+                    { sampleText.summary }<br/>
+                </div>
             );
         }
     }
