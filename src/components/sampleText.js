@@ -5,6 +5,6 @@ I have experience in social media, digital marketing, and data analysis. I manag
   
 When I’m not working I’m probably on the beach volleyball court, whipping up something in the kitchen, or boarding a plane for my next adventure.`,
 
-  project1: `A website committed to increasing interest among college age neophyte foodies.`,
-  project2: `Graphic design skills on display.`
+  project1: `A website committed to teaching college students how to cook.`,
+  project2: `Copywriting and graphic design skills on display.`
 };
