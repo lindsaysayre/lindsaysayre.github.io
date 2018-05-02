@@ -33,18 +33,16 @@ class Experience extends React.Component {
             return (
                 <pre className="experience-content">
                   <center className="icons">
-                    <img src="assets/icons/excel.png" alt="excel"/>
-                    <img src="assets/icons/access.png" alt="access"/>
-                    <img src="assets/icons/spss.png" alt="spss"/>
-                    <img src="assets/icons/powerpoint.png" alt="excel"/>
+                    <img src="assets/icons/adobe.png" alt="adobe"/>
+                    <img src="assets/icons/analytics.png" alt="analytics"/>
+                    <img src="assets/icons/hubspot.png" alt="hubspot"/>
                     <img src="assets/icons/wordpress.png" alt="wordpress"/>
-                    <img src="assets/icons/html5.png" alt="html5"/>
-                    <img src="assets/icons/css3.png" alt="css3"/><br />
-                    <strong> Data Analysis | </strong>Microsoft Excel, Microsoft Access, SPSS<br /><br />
-                    <strong>Content Creation | </strong>Adobe Creative Suite, SEO, Blog Writing, WordPress, Press Releases<br /><br />
-                    <strong>Research | </strong>Survey Building and Analysis, Writing Reports<br /><br />
+                    <br />
+                    <strong> Certifications | </strong>Inbound Marketing (HubSpot), Google Analytics<br /><br />
+                    <strong>Content Creation | </strong>Adobe Creative Suite, Copywriting, WordPress<br /><br />
+                    <strong>Writing | </strong>SEO, Blog Posts, Email Marketing, Ad Copy, Product Descriptions<br /><br />
                     <strong>Social Media | </strong>Strategy, Channel Management, Direct Customer Communication<br /><br />
-                    <strong>Learning | </strong>SQL, HTML5, CSS3, Javascript, Git, GitHub<br /><br />
+                    <strong>Market Research | </strong>Writing & Presenting Reports, Customer Segmentation & Positioning, Competitor Analysis<br /><br />
                     <br /><br />
                   </center>
                 </pre>

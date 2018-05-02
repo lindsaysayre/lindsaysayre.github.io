@@ -1,8 +1,10 @@
 module.exports = {
-  summary: `I’m Lindsay, an Ohio State University graduate with a passion for marketing and entrepreneurship. I have worked at a startup, a multi-billion dollar corporation, and studied everything in between. My experience spans across a wide range of products and services, so I specialize in jumping in with both feet and getting up to speed quickly. I love a challenge and thrive in a dynamic work environment where I get to wear many hats.
+  summary: `I’m a digital marketing specialist and small business owner based in San Diego.
   
-I have experience in social media, digital marketing, and data analysis. I managed all social media channels at a beverage startup called Life Support. With a focus on growth, I developed and implemented a strategy, created content, and engaged with customers. I have also worked at American Greetings, where I focused on analyzing customer data and past sales metrics to identify opportunities to improve productivity and create future retail strategies.
+In 2017 I started an Amazon Ecommerce home and party goods company. I continue to run that business from A to Z on a day-to-day basis. I also consult with other businesses to help them start or grow their brands and improve their marketing strategy and content mix.
   
+Before that, I worked at a beverage startup called Life Support, American Greetings, a multi-billion dollar greeting card company, and studied everything in between at Ohio State University.
+
 When I’m not working I’m probably on the beach volleyball court, whipping up something in the kitchen, or boarding a plane for my next adventure.`,
 
   project1: `A website committed to teaching college students how to cook.`,
