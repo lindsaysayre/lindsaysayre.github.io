@@ -89,7 +89,7 @@ class Layout extends React.Component {
                         <div className="main-banner-overlay"></div>
                         <div className="main-description">
                             <h1 >LINDSAY SAYRE</h1>
-                            <h3>Marketing Strategist and Entrepreneur.</h3>
+                            <h3>Digital Marketing Specialist and Entrepreneur</h3>
                         </div>
                         <div className="down-arrow"
                              onClick={() => this.startScrollToIndex(1)}>

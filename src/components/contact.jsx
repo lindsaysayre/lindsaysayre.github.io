@@ -21,8 +21,6 @@ class Contact extends React.Component {
                             Want to discuss a marketing gig for your organization or community project?
                             <br /><br />
                             Don't hesitate to reach out.
-                            <br /><br />
-                            Photographs & Website by <strong>Lindsay Sayre</strong> using <strong>React.JS</strong>.
                         </p>
                     </div>
                     <div className="up-arrow" onClick={this.props.upArrowClick}>
