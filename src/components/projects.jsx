@@ -52,7 +52,7 @@ class Projects extends React.Component {
     }
 
     onLeftArrow() {
-        this.setState({focused: !this.state.focused === 0 ? 1 : 0});
+        this.setState({focused: this.state.focused === 1 ? 0 : 1});
     }
 
     getSliderStyle() {
@@ -63,7 +63,11 @@ class Projects extends React.Component {
         return (
             <div>
                 <div className="project-container-container">
-                    <i className="fa fa-chevron-left fa-4x mobile-disappear" onClick={this.onLeftArrow}></i>
+                    <i className="fa fa-chevron-left fa-4x mobile-disappear" 
+                        onClick={this.onLeftArrow}
+                        onMouseEnter={this.arrestInterval}
+                        onMouseLeave={this.resumeInterval}>
+                    </i>
                     <div className="project-container">
                         <div className="project-slider"
                              onMouseEnter={this.arrestInterval}
@@ -91,7 +95,10 @@ class Projects extends React.Component {
                         </div>
                     </div>
                     <i className="fa fa-chevron-right fa-4x mobile-disappear"
-                       onClick={this.onRightArrow}></i>
+                        onClick={this.onRightArrow}
+                        onMouseEnter={this.arrestInterval}
+                        onMouseLeave={this.resumeInterval}>
+                    </i>
                 </div>
                 <div className="project-nav mobile-disappear">
                     <div className={this.state.focused === 0 ?
