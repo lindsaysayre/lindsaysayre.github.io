@@ -7,6 +7,8 @@ Before that, I worked at a beverage startup called Life Support, American Greeti
 
 When I’m not working I’m probably on the beach volleyball court, whipping up something in the kitchen, or boarding a plane for my next adventure.`,
 
-  project1: `A website committed to teaching college students how to cook.`,
-  project2: `Copywriting and graphic design skills on display.`
+  project1: `Helping others build businesses online`,
+  project2: ` `,
+  project3: `Copywriting and graphic design skills on display.`,
+  project4: `A website committed to teaching college students how to cook.`
 };
