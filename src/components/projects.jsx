@@ -74,7 +74,7 @@ class Projects extends React.Component {
                              style={this.getSliderStyle()}>
                             <div className="project project-1">
                                 <div className="project-overlay">
-                                    <h1>Amazon & Ecommerce Consultant</h1>
+                                    <h2>Amazon & Ecommerce Consultant</h2>
                                     <p>{sampleText.project1}</p>
                                     <div>
                                         <a href="https://www.upwork.com/o/profiles/users/_~01603eb21c03bcb13d/" alt="upwork.com" target="_blank"  rel="noopener noreferrer">
@@ -82,21 +82,23 @@ class Projects extends React.Component {
                                         </a>
                                     </div>
                                 </div>
+                            
                             </div>
                             <div className="project project-2">
                                 <div className="project-overlay">
-                                    <h1>I've worked with...</h1>
+                                    <h2>I've worked with...</h2>
                                     <p>{sampleText.project2}</p>
                                 </div>
                             </div>
                             <div className="project project-3">
                                 <div className="project-overlay">
-                                    <h1>Marketing Consultant</h1>
+                                    <h2>Marketing Consultant</h2>
                                     <p>{sampleText.project3}</p>
                                 </div>
-                            </div><div className="project project-4">
+                            </div>
+                            <div className="project project-4">
                                 <div className="project-overlay">
-                                    <h1>RamenRevolt.com</h1>
+                                    <h2>RamenRevolt.com</h2>
                                     <p>{sampleText.project4}</p>
                                     <div>
                                         <a href="https://www.ramenrevolt.com/" alt="See it live!" target="_blank"
