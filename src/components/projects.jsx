@@ -32,7 +32,7 @@ class Projects extends React.Component {
         } else {
             this.arrestInterval();
         }
-        this.setState({focused: 0});
+        this.setState({focus: 0});
     }
 
     arrestInterval() {
@@ -46,17 +46,16 @@ class Projects extends React.Component {
         }
     }
 
-
     onRightArrow() {
-        this.setState({focused: this.state.focused === 0 ? 1 : 0});
+        this.setState({focus: this.state.focus === 3 ? 0 : this.state.focus + 1 });
     }
 
     onLeftArrow() {
-        this.setState({focused: this.state.focused === 1 ? 0 : 1});
+        this.setState({focus: this.state.focus === 0 ? 3 : this.state.focus - 1 });
     }
 
     getSliderStyle() {
-        return {marginLeft: -(this.state.focused * window.innerWidth * 0.62)};
+        return {marginLeft: -(this.state.focus * window.innerWidth * 0.62)};
     }
 
     render() {
@@ -75,8 +74,25 @@ class Projects extends React.Component {
                              style={this.getSliderStyle()}>
                             <div className="project project-1">
                                 <div className="project-overlay">
-                                    <h1>RamenRevolt.com</h1>
+                                    <h1>Amazon & Ecommerce Consultant</h1>
                                     <p>{sampleText.project1}</p>
+                                </div>
+                            </div>
+                            <div className="project project-2">
+                                <div className="project-overlay">
+                                    <h1>I've worked with</h1>
+                                    <p>{sampleText.project2}</p>
+                                </div>
+                            </div>
+                            <div className="project project-3">
+                                <div className="project-overlay">
+                                    <h1>Marketing Consultant</h1>
+                                    <p>{sampleText.project3}</p>
+                                </div>
+                            </div><div className="project project-4">
+                                <div className="project-overlay">
+                                    <h1>RamenRevolt.com</h1>
+                                    <p>{sampleText.project4}</p>
                                     <div>
                                         <a href="https://www.ramenrevolt.com/" alt="See it live!" target="_blank"
                                            rel="noopener noreferrer">
@@ -85,13 +101,6 @@ class Projects extends React.Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="project project-2">
-                                <div className="project-overlay">
-                                    <h1>Marketing Consultant</h1>
-                                    <p>{sampleText.project2}</p>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                     <i className="fa fa-chevron-right fa-4x mobile-disappear"
@@ -101,12 +110,18 @@ class Projects extends React.Component {
                     </i>
                 </div>
                 <div className="project-nav mobile-disappear">
-                    <div className={this.state.focused === 0 ?
+                    <div className={this.state.focus === 0 ?
                         'project-nav-button active' : 'project-nav-button'}
-                         onClick={() => this.setState.bind(this, {focused: 0})}/>
-                    <div className={this.state.focused === 1 ?
+                         onClick={() => this.setState.bind(this, {focus: 0})}/>
+                    <div className={this.state.focus === 1 ?
                         'project-nav-button active' : 'project-nav-button'}
-                         onClick={() => this.setState.bind(this, {focused: 1})}/>
+                         onClick={() => this.setState.bind(this, {focus: 1})}/>
+                    <div className={this.state.focus === 2 ?
+                        'project-nav-button active' : 'project-nav-button'}
+                         onClick={() => this.setState.bind(this, {focus: 2})}/>
+                    <div className={this.state.focus === 3 ?
+                        'project-nav-button active' : 'project-nav-button'}
+                         onClick={() => this.setState.bind(this, {focus: 3})}/>
                 </div>
             </div>
         );
