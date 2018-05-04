@@ -327,7 +327,7 @@ img.upwork {
 
 .project {
     background-image: url('http://placecorgi.com/700/500');
-    background-size: cover;
+    background-size: contain;
     height: 65vh;
     min-height: 350px;
     width: 62vw;
@@ -335,11 +335,19 @@ img.upwork {
 }
 
 .project-1 {
-    background-image: url('../assets/images/ramenrevolt.png');
+    background-image: url('../assets/images/upwork.png');
 }
 
 .project-2 {
-    background-image: url('../assets/images/Memorial Day 4x6.png');
+    background-image: url('../assets/images/companies.png');
+}
+
+.project-3 {
+    background-image: url('../assets/images/memorial day.png');
+}
+
+.project-4 {
+    background-image: url('../assets/images/ramenrevolt.png');
 }
 
 .project-nav {
