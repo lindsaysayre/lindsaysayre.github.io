@@ -76,11 +76,16 @@ class Projects extends React.Component {
                                 <div className="project-overlay">
                                     <h1>Amazon & Ecommerce Consultant</h1>
                                     <p>{sampleText.project1}</p>
+                                    <div>
+                                        <a href="https://www.upwork.com/o/profiles/users/_~01603eb21c03bcb13d/" alt="upwork.com" target="_blank"  rel="noopener noreferrer">
+                                            <i className="fa fa-external-link fa-4x" aria-hidden="true"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                             <div className="project project-2">
                                 <div className="project-overlay">
-                                    <h1>I've worked with</h1>
+                                    <h1>I've worked with...</h1>
                                     <p>{sampleText.project2}</p>
                                 </div>
                             </div>

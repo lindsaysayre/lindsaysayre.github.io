@@ -327,7 +327,7 @@ img.upwork {
 
 .project {
     background-image: url('http://placecorgi.com/700/500');
-    background-size: cover;
+    background-size: contain;
     height: 65vh;
     min-height: 350px;
     width: 62vw;
