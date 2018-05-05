@@ -83,7 +83,7 @@ class Projects extends React.Component {
                             onMouseEnter={this.arrestInterval}
                             onMouseLeave={this.resumeInterval}
                             style={this.getSliderStyle()}>
-                            <div className="project-overlay">`
+                            <div className="project-overlay">
                                     <h2>Amazon & Ecommerce Consultant</h2>
                                 <p>{sampleText.project1}</p>
                                 <div>
@@ -93,7 +93,7 @@ class Projects extends React.Component {
                                 </div>
                             </div>
 
-                            <div className="project-overlay">`
+                            <div className="project-overlay">
                                     <h2>I've worked with...</h2>
                                 <p>{sampleText.project2}</p>
                             </div>
