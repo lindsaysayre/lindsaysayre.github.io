@@ -1,4 +1,9 @@
 /* Reset */
+/*
+* {
+    border: 1px red solid;
+}
+*/
 
 html, body, section, article,
 h1, h2, h3, p, strong, em, a, ul, main, nav {
@@ -299,7 +304,7 @@ img.upwork {
     width: 80vw;
 }
 
-.project-container-container i {
+.project-container-container i {            /* This is for the left and right chevron buttons */
     cursor: pointer;
     color: black;
     transition: color 0.5s;
@@ -316,38 +321,81 @@ img.upwork {
     width: 62vw;
     margin: 30px;
     overflow: hidden;
+    position: relative;
 }
 
 .project-slider {
     margin-left: 0;
-    transition: margin-left 0.5s linear;
-    position: relative;
+    position: absolute;
     width: 320vw;
 }
 
+.project-overlays {
+    position: absolute;
+    width: 320vw;
+    display: flex;
+}
+
 .project {
-    background-image: url('http://placecorgi.com/700/500');
-    background-size: contain;
     height: 65vh;
     min-height: 350px;
     width: 62vw;
     display: inline-block;
+    margin: 0 auto;
+    opacity: 0.52;
+    filter: alpha(opacity=52); /* For IE8 and earlier */
+}
+
+.project:hover {
+    opacity: 0.55;
+    filter: alpha(opacity=55); /* For IE8 and earlier */
 }
 
 .project-1 {
-    background-image: url('../assets/images/upwork.png');
+    content: url('../assets/images/upwork.png');
 }
 
 .project-2 {
-    background-image: url('../assets/images/companies.png');
+    content: url('../assets/images/companies.png');
 }
 
 .project-3 {
-    background-image: url('../assets/images/memorial day.png');
+    content: url('../assets/images/memorial day.png');
 }
 
 .project-4 {
-    background-image: url('../assets/images/ramenrevolt.png');
+    content: url('../assets/images/ramenrevolt.png');
+}
+
+.project-overlay {
+//    width: 100%;
+//    height: 100%;
+//    background: rgba(255, 255, 255, 1);
+//    color: rgba( 255, 255, 255, 1 );
+//    transition: background 0.5s linear;
+    
+    height: 65vh;
+    min-height: 350px;
+    width: 62vw;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.project-overlay p {
+    font-size: 20px;
+    font-weight: 700;
+    padding-bottom: 20px;
+    color: black;
+    text-align: top;
+}
+
+.project-overlay div a {
+    //margin: 220px;
+    text-align: center;
+    vertical-align: baseline;
 }
 
 .project-nav {
@@ -374,34 +422,6 @@ img.upwork {
 
 .project-nav-button.active {
     background-color: black;
-}
-
-.project-overlay {
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.7);
-    transition: background 0.5s linear;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center ;
-}
-
-.project-overlay p {
-    font-size: 20px;
-    font-weight: 700;
-    padding-bottom: 20px;
-}
-
-.project-overlay div a {
-    margin: 20px;
-}
-
-.project:hover .project-overlay {
-    opacity: 1;
-    visibility: visible;
-    background: rgba(255, 255, 255, 0.9);
 }
 
 /* Contact */
@@ -571,7 +591,6 @@ img.upwork {
 
     .project-slider {
         width: 100%;
-
     }
 
     .project {
